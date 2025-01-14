@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            overflow: hidden;
+        }
+
+        #passwordScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            margin-left: 8%;
+            margin-right: 8%;
+            background: linear-gradient(135deg, #508aff, #1ca0a5);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #passwordScreen h2 {
+            font-size: 36px;
+            font-family: 'Pacifico', cursive;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #passwordInput {
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            outline: none;
+            width: 80%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #submitPassword {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            color: white;
+            background-color: #32cd32;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        #submitPassword:hover {
+            transform: scale(1.1);
+        }
+
+        #timerScreen {
+            display: none;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        #timer {
+            font-size: 10vw;
+            font-weight: bold;
+            color: #ff4500;
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        #birthdayScreen {
+            display: none;
+            text-align: center;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background-image: url('https://example.com/background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .balloons-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows clicks to pass through balloons */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.balloon {
+    position: absolute;
+    top: -100px; /* Start off the top of the screen */
+    width: 50px;
+    height: 70px;
+    background-color: #ff69b4;
+    border-radius: 50%;
+    animation: floatDown 6s infinite;
+    z-index: 1001; /* Ensure individual balloons stay above containers */
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh); /* Move to the bottom of the screen */
+        opacity: 0;
+    }
+}
+
+        .cake {
+            position: relative;
+            margin: auto;
+            margin-top: 100px;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #ff9999, #ff6666);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cake::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 30px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .candle {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 60px;
+            background-color: #ffffe0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 25px;
+            background: radial-gradient(circle, #ff4500, #ff6347);
+            border-radius: 50%;
+            animation: flicker 1s infinite;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 36px;
+            font-family: 'Pacifico', cursive;
+            color: #ff1493;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .flex-box {
+            padding : 20px 20px 20px 20px ; 
+            width: 300px;
+            height: 180px;
+            background: linear-gradient(135deg, #ff7f50, #ff4500);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 14px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .flex-box h3 {
+            position: absolute;
+            top: -30px;
+            background: #ffffff;
+            color: rgb(57, 53, 53);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 3px solid black;
+            font-size: 16px;
+            font-family: 'Pacifico', cursive;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="passwordScreen">
+        <h2>Enter Password to See the Surprise!</h2>
+        <input id="passwordInput" type="password" placeholder="Enter Password">
+        <button id="submitPassword">Submit</button>
+    </div>
+    <div id="timerScreen">
+        <div id="timer">10</div>
+    </div>
+    <div id="birthdayScreen">
+        <div class="cake">
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+        </div>
+        <p class="message">Happy Birthday, Ichhu! ❤️🎉🎂🎈</p>
+        <div class="balloon" style="left: 20%; animation-duration: 5s; background-color: #ffa500;"></div>
+        <div class="balloon" style="left: 40%; animation-duration: 6s; background-color: #ff69b4;"></div>
+        <div class="balloon" style="left: 60%; animation-duration: 4s; background-color: #87cefa;"></div>
+        <div class="balloon" style="left: 80%; animation-duration: 5.5s; background-color: #32cd32;"></div>
+        <div class="flex-container">
+            <div class="flex-box">
+                <h3>💖</h3>
+                Yuhh are everything for meeeee reallyyyyyy I love yuhh so much . I can't express my lovee but yuhh are always in my heart . At that time I make this webtiye for yuhh , I am very sad due to some trust issues , but I create this only for yuhh . 3115 💝
+            </div>
+            <div class="flex-box">
+                <h3>😔</h3>
+                Sryyyyyy , but I am not able to give you a real giftt due to some problems . I really don't have money right now to buy something for yuh and I also not want to lend money from my friend so I can't able to purchase anything . Sryyy but I gave you my precious heart that is very expensiveee . Please forgive me .
+            </div>
+            <div class="flex-box">
+                <h3>Details</h3>
+                This page is created on 14 Jan 2025 for my love . Her birthday was on 15 jan , the next day , I hope she loved this.
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const passwordScreen = document.getElementById('passwordScreen');
+        const timerScreen = document.getElementById('timerScreen');
+        const birthdayScreen = document.getElementById('birthdayScreen');
+        const submitPassword = document.getElementById('submitPassword');
+        const timerElement = document.getElementById('timer');
+        const balloons = document.querySelectorAll('.balloon');
+
+        submitPassword.addEventListener('click', () => {
+            const password = document.getElementById('passwordInput').value;
+            if (password === 'naitik') {
+                passwordScreen.style.display = 'none';
+                timerScreen.style.display = 'block';
+
+                let countdown = 10;
+                const interval = setInterval(() => {
+                    countdown--;
+                    timerElement.textContent = countdown;
+
+                    if (countdown === 0) {
+                        clearInterval(interval);
+                        timerScreen.style.display = 'none';
+                        birthdayScreen.style.display = 'block';
+
+                        setTimeout(() => {
+                            balloons.forEach(balloon => {
+                                balloon.style.animation = 'none';
+                                balloon.style.display = 'none';
+                            });
+                        }, 10000);
+                    }
+                }, 1000);
+            } else {
+                alert('Incorrect Password! Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>
